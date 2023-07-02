@@ -25,7 +25,7 @@
 
 - name: "Prepare for configuration"
   ansible.builtin.file:
-    path: "/etc/OpenVoiceOS/"
+    path: "/etc/mycroft"
     state: "directory"
   tags:
     - "ovos"
@@ -80,7 +80,7 @@
 - name: "Install configuration"
   ansible.builtin.template:
     src: "ovos.config.j2"
-    dest: "/etc/OpenVoiceOS/ovos.conf"
+    dest: "/etc/mycroft/mycroft.conf"
   notify:
     - "Restart Ovos Services"
   tags:
