@@ -1,4 +1,4 @@
-denics.ovos
+OpenVoiceOS.ovos-ansible
 =========
 
 A brief description of the role goes here.
