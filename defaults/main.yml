@@ -111,7 +111,10 @@ ovos_service_wolfram_key: "{{ secret_wolfram_api_key }}"
 ovos_service_owm_key: "{{ secret_owm_api_key }}"
 
 # STT - ovos-stt-plugin-server
-ovos_stt_plugin_server: "https://stt.openvoiceos.org/stt"
+ovos_stt_plugin_server: 
+  - "https://stt.openvoiceos.org/stt"
+  - "https://fasterwhisper.ziggyai.online/stt"
+  
 
 # TTS - ovos-tts-plugin-piper
 ovos_tts_plugin_piper: ""
