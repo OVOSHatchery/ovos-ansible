@@ -7,68 +7,7 @@
   "date_format": "{{ ovos_date_format }}",
   "opt_in": "{{ ovos_opt_in }}",
   "confirm_listening": "{{ ovos_confirm_listening }}",
-  "sounds": {
-    "start_listening": "snd/start_listening.wav",
-    "end_listening": "snd/end_listening.wav",
-    "acknowledge": "snd/acknowledge.mp3",
-    "error": "snd/error.mp3"
-  },
   "cache_path": "{{ ovos_cache_path }}",
-  "skills": {
-    "wait_for_internet": false,
-    "directory": "skills",
-    "upload_skill_manifest": false,
-    "sync2way": true,
-    "autogen_meta": false,
-    "blacklisted_skills": [],
-    "priority_skills": [],
-    "fallbacks": {
-        "fallback_priorities": {
-        },
-        "fallback_mode": "accept_all",
-        "fallback_whitelist": [],
-        "fallback_blacklist": []
-    },
-    "converse": {
-        "timeout": 300,
-        "skill_timeouts": {},
-        "converse_mode": "accept_all",
-        "converse_whitelist": [],
-        "converse_blacklist": [],
-        "converse_activation": "accept_all",
-        "max_activations": -1,
-        "skill_activations": {},
-        "cross_activation": true,
-        "cross_deactivation": true,
-        "converse_priorities": {
-        }
-    }
-  },
-  "system": {
-    "disable_user_config": false,
-    "disable_remote_config": true,
-    "protected_keys": {
-        "remote": [
-            "enclosure",
-            "server",
-            "system",
-            "websocket",
-            "gui_websocket",
-            "network_tests",
-            "listener:wake_word_upload:disable",
-            "listener:channels",
-            "listener:sample_rate",
-            "listener:multiplier",
-            "listener:energy_ratio",
-            "skills:upload_skill_manifest",
-            "skills:auto_update",
-            "skills:priority_skills",
-            "skills:blacklisted_skills",
-            "opt_in"
-        ],
-        "user": []
-    }
-  },
   "server": {
     "backend_type": "{{ ovos_server_backend_type }}",
     "url": "{{ ovos_server_backend_url }}",
@@ -93,26 +32,6 @@
           }
       }
   },
-  "websocket": {
-    "host": "0.0.0.0",
-    "port": 8181,
-    "route": "/core",
-    "ssl": false,
-    "shared_connection": true
-  },
-  "gui_websocket": {
-    "host": "0.0.0.0",
-    "base_port": 18181,
-    "route": "/gui",
-    "ssl": false
-  },
-  "network_tests": {
-    "dns_primary": "8.8.8.8",
-    "dns_secondary": "8.8.4.4",
-    "web_url": "https://www.google.com",
-    "ncsi_endpoint": "http://www.msftncsi.com/ncsi.txt",
-    "ncsi_expected_text": "Microsoft NCSI"
-  },
   "listener": {
     "wake_word": "hey_mycroft",
     "stand_up_word": "wake_up",
@@ -120,19 +39,10 @@
       "module": "{{ ovos_microphone_package_name }}"
     },
     "VAD": {
-     "speech_seconds": 0.1,
-     "silence_seconds": 0.5,
-     "before_seconds": 0.5,
-     "min_seconds": 1,
      "module": "{{ ovos_vad_package_name }}",
      "ovos-vad-plugin-silero": {"threshold": 0.2},
      "ovos-vad-plugin-webrtcvad": {"vad_mode": 3}
     },
-    "recording_timeout": 10.0,
-    "recording_timeout_with_silence": 3.0,
-    "continuous_listen": false,
-    "hybrid_listen": false,
-    "listen_timeout": 45
   },
   "hotwords": {
     "hey mycroft": {
@@ -161,19 +71,11 @@
         "wakeup": true
     }
   },
-  "enclosure": {
-    "platform": "PHAL",
-    "ntp_sync_on_boot": false,
-    "force_mycroft_ntp": true
-  },
   "gui": {
     "extension": "generic",
     "generic": {
         "homescreen_supported": false
     }
-  },
-  "session": {
-    "ttl": -1
   },
   "stt": {
     "module": "{{ ovos_stt_name }}",
@@ -192,53 +94,6 @@
     "ovos_tts_plugin_server": {
       "url":"{{ ovos_tts_plugin_server }}"
     }
-  },
-  "tokenization": {
-      "module": "ovos-tokenization-plugin-quebrafrases"
-  },
-  "segmentation": {
-      "module": "ovos-segmentation-plugin-quebrafrases"
-  },
-  "keyword_extract": {
-     "module": "ovos-keyword-extractor-heuristic"
-  },
-  "coref": {
-     "module": "ovos-coref-solver-heuristic"
-  },
-  "postag": {
-     "module": "ovos-classifiers-postag-plugin"
-  },
-  "g2p": {
-     "module": "ovos-g2p-plugin-dummy"
-  },
-  "padatious": {
-    "intent_cache": "~/.local/share/mycroft/intent_cache",
-    "train_delay": 4,
-    "single_thread": false,
-    "regex_only": true,
-    "fuzz": true
-  },
-  "language": {
-    "detection_module": "ovos-lang-detect-ngram-lm",
-    "translation_module": "libretranslate_plug"
-  },
-  "Audio": {
-    "native_sources": ["debug_cli", "audio"],
-    "backends": {
-      "OCP": {
-        "type": "ovos_common_play",
-        "active": true
-      },
-      "simple": {
-        "type": "ovos_audio_simple",
-        "active": true
-      },
-      "vlc": {
-        "type": "ovos_vlc",
-        "active": true
-      }
-    },
-    "default-backend": "OCP"
   },
   "log_level": "{{ ovos_log_level }}",
   "ignore_logs": "{{ ovos_ignore_logs }}",
