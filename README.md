@@ -1,7 +1,9 @@
-OpenVoiceOS.ovos-ansible
+openvoiceos.ovos
 =========
 
-A brief description of the role goes here.
+OpenVoiceOS Ansible role to install OVOS. WIP, supports:
+
+- MarkII DevKit - Raspbian 12
 
 Requirements
 ------------
