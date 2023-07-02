@@ -1,12 +1,21 @@
+---
 galaxy_info:
-  author: "Denis Pitzalis"
-  description: "Install and configure Ovos as server."
-  license: "BSD-3-Clause"
-
+  role_name: openvoiceos
+  author: openvoiceos
+  description: Install and configure OpenVoiceOS Core
+  company: OpenVoiceOS
+  issue_tracker_url: https://github.com/OpenVoiceOS/ovos-ansible/issues
+  license: MIT
   min_ansible_version: "2.10"
-
+  platforms:
+    - name: Debian
+      versions:
+        - 12
   galaxy_tags:
-    - "package"
-    - "service"
+    - mycroft
+    - picroft
+    - ovos
+    - mycroftai
+    - voiceassistant
 
 dependencies: []
