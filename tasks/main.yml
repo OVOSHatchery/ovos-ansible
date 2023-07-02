@@ -60,13 +60,13 @@
   loop:
     - "{{ ovos_core_package_names }}"
     - "{{ ovos_phal_plugin_names }}"
-    - "{{ ovos_listener_package_names }}"
-    - "{{ ovos_microphone_package_name}}"
+    - "{{ ovos_listener_package_name }}"
+    - "{{ ovos_microphone_package_name }}"
     - "{{ ovos_vad_package_name }}"
     - "{{ ovos_ww_package_name }}"
     - "{{ ovos_stt_name }}"
     - "{{ ovos_tts_name }}"
-    - "{{ ovos_gui_name }}"
+    - "{{ ovos_gui_names }}"
     - "{{ ovos_skill_names }}"
   become: true
   notify:

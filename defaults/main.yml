@@ -18,9 +18,9 @@ ovos_core_package_names:
   - "ovos-workshop"
   - "ovos-lingua-franca"
   - "ovos-cli-client"
-
-ovos_phal_plugin_names:
   - "ovos-PHAL"
+
+ovos_phal_plugin_names: []
 #  - "ovos-phal-plugin-connectivity-events"
 #  - "ovos-phal-plugin-system"
 #  - "ovos-PHAL-plugin-ipgeo"
@@ -29,26 +29,23 @@ ovos_phal_plugin_names:
 #  - "ovos-phal-plugin-alsa"
 #  - "ovos-PHAL-plugin-mk2"
 
-ovos_listener_package_names:
-  - "ovos-dinkum-listener"
+ovos_listener_package_name: "ovos-dinkum-listener"
 
-ovos_vad_package_name:
-  - "ovos-vad-plugin-silero"
-#  - "ovos-vad-plugin-webrtcvad"
+# can be: 
+# "ovos-vad-plugin-webrtcvad"
+# "ovos-vad-plugin-silero"
+# If using dinkum as listener, then silero must be preferred
+ovos_vad_package_name: "ovos-vad-plugin-silero"
 
-ovos_microphone_package_name:
-  - "ovos-microphone-plugin-alsa"
+ovos_microphone_package_name: "ovos-microphone-plugin-alsa"
 
-ovos_ww_package_name:
-  - "ovos-ww-plugin-precise-lite"
+ovos_ww_package_name: "ovos-ww-plugin-precise-lite"
 
-ovos_stt_name: 
-  - "ovos-stt-plugin-server"
+ovos_stt_name: "ovos-stt-plugin-server"
 
-ovos_tts_name: 
-  - "ovos-tts-plugin-server"
+ovos_tts_name: "ovos-tts-plugin-server"
 
-ovos_gui_name: 
+ovos_gui_names: 
   - "ovos-gui"
 
 ovos_skill_names:
@@ -120,7 +117,7 @@ ovos_stt_plugin_server:
 ovos_tts_plugin_piper: ""
 
 # TTS - ovos-tts-plugin-server
-ovos_tts_plugin_server: "http://mycroft.blue-systems.com:59125"
+ovos_tts_plugin_server: ""
 
 ovos_log_level: "INFO"
 ovos_ignore_logs:
