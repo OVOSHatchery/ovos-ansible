@@ -71,7 +71,7 @@
   },
   "server": {
     "backend_type": "{{ ovos_server_backend_type }}",
-    "url": "",
+    "url": "{{ ovos_server_backend_url }}",
     "version": "v1",
     "update": false,
     "metrics": true,
@@ -172,8 +172,6 @@
         "homescreen_supported": false
     }
   },
-  "log_level": "INFO",
-  "ignore_logs": ["enclosure.mouth.viseme", "enclosure.mouth.display"],
   "session": {
     "ttl": -1
   },
@@ -242,5 +240,7 @@
     },
     "default-backend": "OCP"
   },
+  "log_level": "{{ ovos_log_level }}",
+  "ignore_logs": "[{{ ovos_ignore_logs }}]",
   "debug": false
 }

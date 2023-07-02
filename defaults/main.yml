@@ -105,6 +105,7 @@ ovos_log_path: "/var/log/ovos"
 
 # offline, personal -> https://github.com/OpenVoiceOS/OVOS-local-backend
 ovos_server_backend_type: "offline"
+ovos_server_backend_url: ""
 
 ovos_service_wolfram_key: "{{ secret_wolfram_api_key }}"
 ovos_service_owm_key: "{{ secret_owm_api_key }}"
@@ -117,3 +118,8 @@ ovos_tts_plugin_piper: ""
 
 # TTS - ovos-tts-plugin-server
 ovos_tts_plugin_server: "http://mycroft.blue-systems.com:59125"
+
+ovos_log_level: "INFO"
+ovos_ignore_logs:
+  - "enclosure.mouth.viseme"
+  - "enclosure.mouth.display"
