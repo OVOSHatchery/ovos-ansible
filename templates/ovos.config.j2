@@ -74,7 +74,7 @@
     "url": "{{ ovos_server_backend_url }}",
     "version": "v1",
     "update": false,
-    "metrics": true,
+    "metrics": false,
     "sync_skill_settings": true
   },
   "microservices": {
@@ -241,6 +241,6 @@
     "default-backend": "OCP"
   },
   "log_level": "{{ ovos_log_level }}",
-  "ignore_logs": "[{{ ovos_ignore_logs }}]",
+  "ignore_logs": "{{ ovos_ignore_logs }}",
   "debug": false
 }
