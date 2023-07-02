@@ -1,0 +1,15 @@
+[Unit]
+Description=Admin PHAL
+PartOf=ovos.service
+After=ovos-messagebus.service
+
+[Service]
+Type=simple
+TimeoutStopSec=30
+Restart=always
+User=root
+ExecStart={{ ovos_datadir }}/bin/ovos_PHAL_admin
+StandardOutput=file:{{ ovos_log_path }}/admin_phal.log
+
+[Install]
+WantedBy=ovos.service

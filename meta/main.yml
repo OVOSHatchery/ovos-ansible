@@ -1,0 +1,12 @@
+galaxy_info:
+  author: "Denis Pitzalis"
+  description: "Install and configure Ovos as server."
+  license: "BSD-3-Clause"
+
+  min_ansible_version: "2.10"
+
+  galaxy_tags:
+    - "package"
+    - "service"
+
+dependencies: []

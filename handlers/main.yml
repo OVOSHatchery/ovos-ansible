@@ -1,0 +1,17 @@
+---
+
+- name: "Restart Ovos Services"
+  ansible.builtin.systemd:
+    name: "{{ ovos_service }}"
+    state: "restarted"
+    daemon_reload: true
+  become: true
+  when:
+    - "ovos_package_state != 'absent'"
+  tags:
+    - "ovos"
+    - "package"
+    - "configuration"
+    - "service"
+
+...

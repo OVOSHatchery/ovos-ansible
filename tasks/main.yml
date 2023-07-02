@@ -1,0 +1,147 @@
+---
+## Package Management
+
+- name: "Install necessary software"
+  ansible.builtin.apt:
+    name: 
+      - 'build-essential'
+      - 'python3-dev'
+      - 'python3-pip'
+      - 'python3-sdnotify'
+      - 'swig'
+      - 'libssl-dev'
+      - 'libfann-dev'
+      - 'portaudio19-dev'
+      - 'libpulse-dev' 
+      - 'cmake' 
+      - 'libncurses-dev'
+      - 'pulseaudio-utils' 
+      - 'pulseaudio'
+    state: present
+  become: true
+  tags:
+    - "ovos"
+    - "package"
+
+- name: "Prepare for configuration"
+  ansible.builtin.file:
+    path: "/etc/OpenVoiceOS/"
+    state: "directory"
+  tags:
+    - "ovos"
+    - "configuration"
+
+- name: "Prepare for logs"
+  ansible.builtin.file:
+    path: "{{ ovos_log_path }}"
+    state: "directory"
+  tags:
+    - "ovos"
+    - "configuration"
+
+- name: "Install dependencies: TensorFlow"
+  ansible.builtin.pip:
+    name: tflite-runtime
+    state: present
+    virtualenv: "{{ ovos_datadir }}"
+    virtualenv_site_packages: true
+    extra_args: -f 'https://whl.smartgic.io/'
+  when: "'ovos-ww-plugin-precise-lite' in ovos_ww_package_name"
+  tags:
+    - "ovos"
+    - "package"
+
+- name: "Manage Ovos Packages"
+  ansible.builtin.pip:
+    name: "{{ item }}"
+    state: present
+    virtualenv: "{{ ovos_datadir }}"
+    virtualenv_site_packages: true
+  loop:
+    - "{{ ovos_core_package_names }}"
+    - "{{ ovos_phal_plugin_names }}"
+    - "{{ ovos_listener_package_names }}"
+    - "{{ ovos_microphone_package_name}}"
+    - "{{ ovos_vad_package_name }}"
+    - "{{ ovos_ww_package_name }}"
+    - "{{ ovos_stt_name }}"
+    - "{{ ovos_tts_name }}"
+    - "{{ ovos_gui_name }}"
+    - "{{ ovos_skill_names }}"
+  become: true
+  notify:
+    - "Restart Ovos Services"
+  tags:
+    - "ovos"
+    - "package"
+
+## Configuration Management
+
+- name: "Install configuration"
+  ansible.builtin.template:
+    src: "ovos.config.j2"
+    dest: "/etc/OpenVoiceOS/ovos.conf"
+  notify:
+    - "Restart Ovos Services"
+  tags:
+    - "ovos"
+    - "configuration"
+
+- name: "Manage Ovos Service File"
+  ansible.builtin.template:
+    src: "{{ ovos_service }}.j2"
+    dest: "/etc/systemd/system/{{ ovos_service }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  become: true
+  notify:
+    - "Restart Ovos Services"
+  tags:
+    - "ovos"
+    - "configuration"
+
+- name: "Manage Services File"
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "/etc/systemd/system/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "0644"
+  loop: "{{ ovos_services }}"
+  become: true
+  notify:
+    - "Restart Ovos Services"
+  tags:
+    - "ovos"
+    - "configuration"
+
+## Service Management
+
+- name: "Manage Ovos Service"
+  ansible.builtin.systemd:
+    name: "{{ ovos_service }}"
+    state: "started"
+    enabled: true
+    daemon_reload: true
+  become: true
+  when:
+    - "ovos_package_state != 'absent'"
+  tags:
+    - "ovos"
+    - "service"
+
+- name: "Manage Services"
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: "started"
+    enabled: true
+    daemon_reload: true
+  loop: "{{ ovos_services }}"
+  become: true
+  when:
+    - "ovos_package_state != 'absent'"
+  tags:
+    - "ovos"
+    - "service"
+    
