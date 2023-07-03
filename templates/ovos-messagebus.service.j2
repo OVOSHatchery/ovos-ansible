@@ -1,0 +1,19 @@
+[Unit]
+Description=OVOS Messagebus
+PartOf=ovos.service
+After=ovos.service
+
+[Service]
+Type=simple
+User={{ ansible_user }}
+Group={{ ansible_user }}
+ExecStart={{ ovos_datadir }}/bin/ovos-messagebus
+TimeoutStartSec=1m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+StandardOutput=file:{{ ovos_log_path }}/bus.log
+
+[Install]
+WantedBy=ovos.service

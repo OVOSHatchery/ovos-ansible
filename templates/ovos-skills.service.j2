@@ -1,0 +1,21 @@
+[Unit]
+Description=OVOS Skills
+PartOf=ovos.service
+After=ovos.service
+After=ovos-messagebus.service
+After=pulseaudio.service
+
+[Service]
+Type=simple
+User={{ ansible_user }}
+Group={{ ansible_user }}
+ExecStart={{ ovos_datadir }}/bin/mycroft-skills
+TimeoutStartSec=10m
+TimeoutStopSec=1m
+Restart=on-failure
+StartLimitInterval=5min
+StartLimitBurst=4
+StandardOutput=file:{{ ovos_log_path }}/skills.log
+
+[Install]
+WantedBy=ovos.service
