@@ -1,0 +1,13 @@
+---
+# /defaults/main/services.yml
+
+ovos_service: "ovos.service"
+ovos_services: 
+  - "ovos-messagebus.service"
+  - "ovos-phal.service"
+  - "ovos-dinkum-listener.service"
+  - "ovos-audio.service"
+  - "ovos-skills.service"
+  - "ovos-admin-phal.service"
+
+...

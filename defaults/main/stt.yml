@@ -1,0 +1,8 @@
+---
+
+ovos_stts:
+  options:
+    ovos-stt-plugin-server:
+      url: "https://stt.openvoiceos.org/stt"
+
+...

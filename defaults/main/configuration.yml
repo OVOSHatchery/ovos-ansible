@@ -1,0 +1,56 @@
+---
+# /defaults/main/configuration.yml
+
+ovos_datadir: "/opt/ovos"
+
+ovos_lang: "en-en" # it-it
+# metric, imperial
+ovos_system_unit: "metric"
+# half, full 
+ovos_time_format: "half" 
+# MDY, DMY
+ovos_date_format: "DMY"
+ovos_opt_in: "false"
+ovos_confirm_listening: "true"
+# /dev/shm/ovos/cache -> to keep in RAM 
+# /tmp/ovos/cache -> to delete each reboot
+ovos_cache_path: "/tmp/mycroft/cache"  
+# emit mycroft.ready signal when all these conditions are met
+# different setups will have different needs
+# eg, a server does not care about audio
+# pairing -> device is paired
+# internet -> device is connected to the internet - NOT IMPLEMENTED
+# skills -> skills reported ready
+# speech -> stt reported ready
+# audio -> audio playback reported ready
+# gui -> gui websocket reported ready - NOT IMPLEMENTED
+# enclosure -> enclosure/HAL reported ready - NOT IMPLEMENTED
+# network_skills -> skills with network requirements
+# internet_skills -> skills with internet requirements
+ovos_ready_settings: "skills"
+
+ovos_log_path: "/var/log/ovos"
+
+# offline, personal -> https://github.com/OpenVoiceOS/OVOS-local-backend
+ovos_server_backend_type: "offline"
+ovos_server_backend_url: ""
+
+ovos_service_wolfram_key: "{{ secret_wolfram_api_key }}"
+ovos_service_owm_key: "{{ secret_owm_api_key }}"
+ovos_service_email:
+  email:
+    recipient: ""
+    smtp:
+      username: "{{ secret_email_smtp_username }}"
+      password: "{{ secret_email_smtp_password }}"
+      host: "{{ secret_email_smtp_host }}"
+      port: "{{ secret_email_smtp_port }}"
+
+ovos_wake_word: "hey_mycroft"
+ovos_stand_up: "wake_up"
+ovos_log_level: "INFO"
+ovos_ignore_logs:
+  - "enclosure.mouth.viseme"
+  - "enclosure.mouth.display"
+
+...

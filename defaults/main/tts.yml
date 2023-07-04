@@ -1,0 +1,10 @@
+---
+
+ovos_ttss:
+  options:
+    ovos_tts_plugin_piper:
+      model: alan-low
+    ovos_tts_plugin_server:
+      host: https://pipertts.ziggyai.online
+
+...

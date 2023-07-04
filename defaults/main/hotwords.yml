@@ -1,0 +1,12 @@
+---
+
+ovos_hotwords:
+  options:
+    hey_mycroft_precise:
+      active: false
+    hey_mycroft_vosk:
+      active: false
+    hey_mycroft_pocketsphinx:
+      active: false
+
+...
