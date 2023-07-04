@@ -46,7 +46,7 @@
     virtualenv: "{{ ovos_datadir }}"
     virtualenv_site_packages: true
     extra_args: -f 'https://whl.smartgic.io/'
-  when: "'ovos-ww-plugin-precise-lite' in ovos_ww_package_name"
+  when: "'ovos-ww-plugin-precise-lite' in ovos_ww"
   tags:
     - "ovos"
     - "package"
@@ -58,16 +58,22 @@
     virtualenv: "{{ ovos_datadir }}"
     virtualenv_site_packages: true
   loop:
-    - "{{ ovos_core_package_names }}"
-    - "{{ ovos_phal_plugin_names }}"
-    - "{{ ovos_listener_package_name }}"
-    - "{{ ovos_microphone_package_name }}"
-    - "{{ ovos_vad_package_name }}"
-    - "{{ ovos_ww_package_name }}"
-    - "{{ ovos_stt_name }}"
-    - "{{ ovos_tts_name }}"
+    - "{{ ovos_core_names }}"
+    - "{{ ovos_phal_plugins }}"
+    - "{{ ovos_listener }}"
+    - "{{ ovos_listener_others }}"
+    - "{{ ovos_microphone }}"
+    - "{{ ovos_microphone_others }}"
+    - "{{ ovos_vad }}"
+    - "{{ ovos_vad_others }}"
+    - "{{ ovos_ww }}"
+    - "{{ ovos_ww_others }}"
+    - "{{ ovos_stt }}"
+    - "{{ ovos_stt_others }}"
+    - "{{ ovos_tts }}"
+    - "{{ ovos_tts_others }}"
     - "{{ ovos_gui_names }}"
-    - "{{ ovos_skill_names }}"
+    - "{{ ovos_skills }}"
   become: true
   notify:
     - "Restart Ovos Services"

@@ -16,59 +16,39 @@
     "sync_skill_settings": true
   },
   "microservices": {
-      "wolfram_provider": "auto",
-      "weather_provider": "auto",
-      "geolocation_provider": "auto",
-      "wolfram_key": "{{ ovos_service_wolfram_key }}",
-      "owm_key": "{{ ovos_service_owm_key }}",
-      "email": {
-          "recipient": "",
-          "smtp": {
-            "username": "",
-            "password": "",
-            "host": "smtp.mailprovider.com",
-            "port": 465
-          }
-      }
+    "wolfram_provider": "auto",
+    "weather_provider": "auto",
+    "geolocation_provider": "auto",
+    "wolfram_key": "{{ ovos_service_wolfram_key }}",
+    "owm_key": "{{ ovos_service_owm_key }}",
+    "email": {
+      "recipient": "",
+      {% for key, value in ovos_service_email.items() %}
+      "{{ key }}": {
+      {% for sub_key, sub_value in value.items() %}
+        "{{ sub_key }}": "{{ sub_value }}"{% if not loop.last %},{% endif %}
+      {% endfor %}
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    }
   },
   "listener": {
-    "wake_word": "hey_mycroft",
-    "stand_up_word": "wake_up",
+    "wake_word": "{{ ovos_wake_word }}",
+    "stand_up_word": "{{ ovos_stand_up }}",
     "microphone": {
-      "module": "{{ ovos_microphone_package_name }}"
+      "module": "{{ ovos_microphone }}"
     },
     "VAD": {
-     "module": "{{ ovos_vad_package_name }}",
-     "ovos-vad-plugin-silero": {"threshold": 0.2},
-     "ovos-vad-plugin-webrtcvad": {"vad_mode": 3}
+      "module": "{{ ovos_vad }}",
+      {% for vad, options in ovos_vads.options.items() %}
+      "{{ vad }}": {{ options | to_nice_json }}{% if not loop.last %},{% endif %}
+      {% endfor %}
     }
   },
   "hotwords": {
-    "hey mycroft": {
-      "module": "{{ ovos_ww_package_name }}",
-      "model": "https://github.com/OpenVoiceOS/precise-lite-models/raw/master/wakewords/en/hey_mycroft.tflite",
-      "listen": true,
-      "sound": "snd/start_listening.wav",
-      "expected_duration": 3,
-      "trigger_level": 3,
-      "sensitivity": 0.5
-    },
-    "hey_mycroft_precise": {
-      "active": false
-    },
-    "hey_mycroft_vosk": {
-      "active": false
-    },
-    "hey_mycroft_pocketsphinx": {
-      "active": false
-    },
-    "wake_up": {
-        "module": "ovos-ww-plugin-pocketsphinx",
-        "phonemes": "W EY K . AH P",
-        "threshold": 1e-20,
-        "lang": "en-us",
-        "wakeup": true
-    }
+    {% for hotword, options in ovos_hotwords.options.items() %}
+    "{{ hotword }}": {{ options | to_nice_json }}{% if not loop.last %},{% endif %}
+    {% endfor %}
   },
   "gui": {
     "extension": "generic",
@@ -77,24 +57,21 @@
     }
   },
   "stt": {
-    "module": "{{ ovos_stt_name }}",
-    "fallback_module": "",
-    "ovos-stt-plugin-server": {
-      "url": "{{ ovos_stt_plugin_server }}"
-    }
+    "module": "{{ ovos_stt }}",
+    "fallback_module": "{{ ovos_stt_fallback }}",
+    {% for stt, options in ovos_stts.options.items() %}
+    "{{ stt }}": {{ options | to_nice_json }}{% if not loop.last %},{% endif %}
+    {% endfor %}
   },
   "tts": {
     "pulse_duck": false,
-    "module": "{{ ovos_tts_name }}",
-    "fallback_module": "",
-    "ovos_tts_plugin_piper": {
-      "url":"{{ ovos_tts_plugin_piper }}"
-    },
-    "ovos_tts_plugin_server": {
-      "url":"{{ ovos_tts_plugin_server }}"
-    }
+    "module": "{{ ovos_tts }}",
+    "fallback_module": "{{ ovos_tts_fallback }}",
+    {% for tts, options in ovos_ttss.options.items() %}
+    "{{ tts }}": {{ options | to_nice_json }}{% if not loop.last %},{% endif %}
+    {% endfor %}
   },
   "log_level": "{{ ovos_log_level }}",
-  "ignore_logs": "{{ ovos_ignore_logs }}",
+  {# "ignore_logs": "{{ ovos_ignore_logs | map('quote') | join(', ') | surround('[', ']') }}",#}
   "debug": false
 }
