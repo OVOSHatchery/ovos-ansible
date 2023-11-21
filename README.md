@@ -1,6 +1,9 @@
 openvoiceos.ovos
 =========
 
+Replaced by [ovos-installer](https://github.com/OpenVoiceOS/ovos-installer)
+
+_________
 OpenVoiceOS Ansible role to install OVOS. WIP, supports:
 
 - MarkII DevKit - Raspbian 12
